@@ -2,11 +2,17 @@ import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 import matplotlib.ticker as mticker
 from matplotlib.finance import candlestick_ohlc
+from matplotlib import style
 import numpy as np
 import urllib
 import ssl
 import datetime as dt
 import time
+
+style.use('ggplot')
+print(plt.__file__)
+
+# print(plt.style.available)
 
 example = time.time()
 print(dt.datetime.fromtimestamp(example))
@@ -50,7 +56,10 @@ def graph_data(stock):
         append_me = date[x], openp[x], highp[x], lowp[x], closep[x], volume[x]
         ohlc.append(append_me)
         x += 1
-        candlestick_ohlc(ax1, ohlc, width=0.4, colorup='g', colordown='r')
+        # candlestick_ohlc(ax1, ohlc, width=0.4, colorup='g', colordown='r')
+        ax1.plot(date, closep)
+        ax1.plot(date, openp)
+
         for label in ax1.xaxis.get_ticklabels():
             label.set_rotation(45)
         ax1.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d'))
